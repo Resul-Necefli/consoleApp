@@ -11,9 +11,12 @@ public class Employee {
     private String position;
     private double salary;
     private String departmentName;
+
+
+    private EmployeeType employeeType;
     private int count;
 
-    private  boolean  isDelete ;
+    private boolean isDelete;
     private static int index = 1000;
 
     public Employee(String departmentName) {
@@ -25,6 +28,8 @@ public class Employee {
     }
 
     public void addEmployee(Employee employee) {
+
+
 
         boolean check = true;
         for (int i = 0; i < employees.length; i++) {
@@ -106,27 +111,31 @@ public class Employee {
         return check;
 
 
-
     }
 
 
-
-
-    public    boolean  isDelete(String no){
+    public boolean isDeleteEmployee(String no) {
         boolean check = true;
 
-        for (int i =0; i <  employees.length; i ++){
+        for (int i = 0; i < employees.length; i++) {
 
-            if (employees[i]!= null && employees[i].no.equals(no)){
+            if (employees[i] != null && employees[i].no.equals(no)) {
                 check = false;
                 employees[i].isDelete = false;
                 break;
             }
         }
 
-        return  check;
+        return check;
     }
 
+    public EmployeeType getEmployeeType() {
+        return employeeType;
+    }
+
+    public void setEmployeeType(EmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
 
     public boolean isDelete() {
         return isDelete;
@@ -153,12 +162,14 @@ public class Employee {
         return position;
     }
 
-    public void setPosition(String position) {
+    public boolean setPosition(String position) {
         if (position.length() >= 2) {
             this.position = position;
-        } else {
-            System.out.println("position minimum two characters");
+            return true;
+
         }
+        System.out.println("position minimum two characters");
+        return false;
 
     }
 
@@ -166,13 +177,16 @@ public class Employee {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public boolean setSalary(double salary) {
+
         if (salary >= 250) {
             this.salary = salary;
-        } else {
-            System.out.println("salary should be at least 250 Azn");
-
+            return true;
         }
+
+        System.out.println("salary should be at least 250 Azn");
+        return false;
+
 
     }
 
@@ -180,13 +194,14 @@ public class Employee {
         return departmentName;
     }
 
-    public void setDepartmentName(String departmentName) {
+    public boolean setDepartmentName(String departmentName) {
         if (departmentName.length() >= 2) {
             this.departmentName = departmentName;
-        } else {
+            return true;
+        }
             System.out.println("department name minimum two characters");
 
-        }
+            return  false;
 
     }
 
