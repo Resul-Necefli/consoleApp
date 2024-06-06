@@ -12,6 +12,8 @@ public class Employee {
     private double salary;
     private String departmentName;
     private int count;
+
+    private  boolean  isDelete ;
     private static int index = 1000;
 
     public Employee(String departmentName) {
@@ -30,6 +32,7 @@ public class Employee {
             if (employees[i] == null) {
                 employees[i] = employee;
                 check = false;
+                break;
             }
 
 
@@ -60,6 +63,7 @@ public class Employee {
 
                 employees[i] = employee;
                 check = false;
+                break;
 
             }
         }
@@ -67,6 +71,69 @@ public class Employee {
         return check;
 
 
+    }
+
+
+    public boolean deleteEmployee(String no) {
+
+        boolean check = true;
+        int index = 0;
+        for (int i = 0; i < employees.length; i++) {
+
+            if (employees[i].no.equals(no)) {
+                check = false;
+                index = i;
+                break;
+            }
+        }
+
+
+        if (!check) {
+            Employee[] employeesDelete = new Employee[employees.length - 1];
+
+            for (int i = 0, j = 0; i < employees.length; i++) {
+
+                if (index != i) {
+                    employeesDelete[j++] = employees[i];
+                }
+
+            }
+
+            employees = employeesDelete;
+
+        }
+
+        return check;
+
+
+
+    }
+
+
+
+
+    public    boolean  isDelete(String no){
+        boolean check = true;
+
+        for (int i =0; i <  employees.length; i ++){
+
+            if (employees[i]!= null && employees[i].no.equals(no)){
+                check = false;
+                employees[i].isDelete = false;
+                break;
+            }
+        }
+
+        return  check;
+    }
+
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public String getNo() {
