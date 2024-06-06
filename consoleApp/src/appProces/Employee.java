@@ -1,66 +1,78 @@
 package appProces;
 
 
-public class Employee  implements Utilproces {
-    private    static  Employee[]  employees = new Employee[100];
+import java.util.Objects;
+
+public class Employee {
+    public static Employee[] employees = new Employee[100];
 
     private String no;
+    private String fulName;
+    private String position;
+    private double salary;
+    private String departmentName;
+    private int count;
+    private static int index = 1000;
 
-    private  int count ;
-
-
-    private static   int index = 1000;
-    public Employee( String  departmentName) {
+    public Employee(String departmentName) {
 
         count++;
         index += count;
-       this.no  = departmentName.substring(0,2).toUpperCase() + index;
+        this.no = departmentName.substring(0, 2).toUpperCase() + index;
 
     }
 
+    public void addEmployee(Employee employee) {
 
-    public  static  Employee returnData(Employee employee){
+        boolean check = true;
+        for (int i = 0; i < employees.length; i++) {
 
-        return  employee;
+            if (employees[i] == null) {
+                employees[i] = employee;
+                check = false;
+            }
+
+
+        }
+
+        if (check) {
+            Employee[] newEmpolyees = new Employee[employees.length * 2];
+
+            for (int i = 0; i < employees.length; i++) {
+                newEmpolyees[i] = employees[i];
+
+            }
+
+            newEmpolyees[employees.length] = employee;
+
+            employees = newEmpolyees;
+
+        }
+
+
     }
 
-    @Override
-    public void createData() {
+    public boolean updateEmloyee(Employee employee, String no) {
+        boolean check = true;
+        for (int i = 0; i < employees.length; i++) {
+
+            if (employee != null && employees[i].no.equals(no)) {
+
+                employees[i] = employee;
+                check = false;
+
+            }
+        }
+
+        return check;
 
 
-    }
-
-    @Override
-    public void updateData() {
-
-    }
-
-    @Override
-    public void deleteData() {
-
-    }
-
-    @Override
-    public void isDeleteData() {
-
-    }
-
-    public static Employee[] getEmployees() {
-        return employees;
-    }
-
-    public static void setEmployees(Employee[] employees) {
-        Employee.employees = employees;
     }
 
     public String getNo() {
         return no;
     }
 
-    private String fulName;
-    private String position;
-    private double salary;
-    private String departmentName;
 
     public String getFulName() {
         return fulName;
@@ -110,4 +122,6 @@ public class Employee  implements Utilproces {
         }
 
     }
+
+
 }
