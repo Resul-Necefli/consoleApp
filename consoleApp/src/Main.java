@@ -1,5 +1,6 @@
 import appProces.Employee;
 import appProces.EmployeeType;
+import appProces.Student;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -13,8 +14,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         create();
     }
+
 
     public static void create() {
         Employee employee = new Employee("IT");

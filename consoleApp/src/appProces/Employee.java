@@ -4,9 +4,9 @@ package appProces;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
-
+///  calcSalayrAvrage()
 public class Employee {
-    public static Employee[] employees = new Employee[100];
+    public static Employee[] employees = new Employee[50];
 
     private String no;
     private String fulName;
@@ -21,13 +21,13 @@ public class Employee {
     private LocalDate deleteDate;
 
 
-    private int count;
+    private int createObjectCount;
     private static int index = 1000;
 
     public Employee(String departmentName) {
 
-        count++;
-        index += count;
+        createObjectCount++;
+        index += createObjectCount;
         this.no = departmentName.substring(0, 2).toUpperCase() + index;
 
     }
@@ -70,7 +70,7 @@ public class Employee {
         boolean check = true;
         for (int i = 0; i < employees.length; i++) {
 
-            if (employee != null && employees[i].no.equals(no)) {
+                   if (employee != null && employees[i].no.equals(no)) {
 
                 employees[i] = employee;
                 employee.updateDate =  LocalDate.now();
