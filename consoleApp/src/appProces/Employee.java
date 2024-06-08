@@ -1,6 +1,8 @@
 package appProces;
 
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
@@ -11,12 +13,15 @@ public class Employee {
     private String position;
     private double salary;
     private String departmentName;
-
-
     private EmployeeType employeeType;
-    private int count;
-
     private boolean isDelete;
+
+    private LocalDate createDate;
+    private LocalDate updateDate;
+    private LocalDate deleteDate;
+
+
+    private int count;
     private static int index = 1000;
 
     public Employee(String departmentName) {
@@ -29,7 +34,7 @@ public class Employee {
 
     public void addEmployee(Employee employee) {
 
-
+        employee.createDate = LocalDate.now();
 
         boolean check = true;
         for (int i = 0; i < employees.length; i++) {
@@ -61,12 +66,14 @@ public class Employee {
     }
 
     public boolean updateEmloyee(Employee employee, String no) {
+
         boolean check = true;
         for (int i = 0; i < employees.length; i++) {
 
             if (employee != null && employees[i].no.equals(no)) {
 
                 employees[i] = employee;
+                employee.updateDate =  LocalDate.now();
                 check = false;
                 break;
 
@@ -80,6 +87,7 @@ public class Employee {
 
 
     public boolean deleteEmployee(String no) {
+
 
         boolean check = true;
         int index = 0;
@@ -110,7 +118,6 @@ public class Employee {
 
         return check;
 
-
     }
 
 
@@ -122,12 +129,16 @@ public class Employee {
             if (employees[i] != null && employees[i].no.equals(no)) {
                 check = false;
                 employees[i].isDelete = false;
+                employees[i].deleteDate =  LocalDate.now();
                 break;
             }
         }
 
         return check;
     }
+
+
+
 
     public EmployeeType getEmployeeType() {
         return employeeType;
@@ -199,11 +210,25 @@ public class Employee {
             this.departmentName = departmentName;
             return true;
         }
-            System.out.println("department name minimum two characters");
+        System.out.println("department name minimum two characters");
 
-            return  false;
+        return false;
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "no='" + no + '\'' +
+                ", fulName='" + fulName + '\'' +
+                ", position='" + position + '\'' +
+                ", salary=" + salary +
+                ", departmentName='" + departmentName + '\'' +
+                ", employeeType=" + employeeType +
+                ", isDelete=" + isDelete +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", deleteDate=" + deleteDate +
+                '}';
+    }
 }

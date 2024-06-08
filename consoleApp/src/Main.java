@@ -1,6 +1,7 @@
 import appProces.Employee;
 import appProces.EmployeeType;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -12,10 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TestTest();
+        create();
     }
 
-    public static void TestTest() {
+    public static void create() {
         Employee employee = new Employee("IT");
         System.out.print("ad ve  soy adinizi daxil dein : ");
         employee.setFulName(scanner.nextLine());
@@ -27,8 +28,6 @@ public class Main {
                 break;
             }
         }
-
-
         while (true) {
             System.out.print("masinizi daxil dein : ");
             boolean b = employee.setSalary(scanner.nextDouble());
@@ -37,9 +36,7 @@ public class Main {
             }
 
         }
-
         scanner.nextLine();
-
         while (true) {
             System.out.print("departament name daxil edin : ");
             boolean c = employee.setDepartmentName(scanner.nextLine());
@@ -47,33 +44,31 @@ public class Main {
                 break;
             }
         }
-
         boolean check = enumTypeCheck(employee);
-        while (!check) {
-            enumTypeCheck(employee);
+        while (check) {
+            boolean v = enumTypeCheck(employee);
+            if (!v) {
+                break;
+            }
         }
-
-
         employee.addEmployee(employee);
-
-
+        System.out.println(employee);
     }
-
 
     public static boolean enumTypeCheck(Employee employee) {
         EmployeeType[] employeeTypes = EmployeeType.values();
 
         System.out.print("is  rejiminizi daxil edin : ");
-        String type = scanner.next();
+        String type = scanner.next().toUpperCase();
 
         for (var a : employeeTypes) {
             if (a.name().equals(type)) {
                 employee.setEmployeeType(a);
-                return true;
+                return false;
             }
 
         }
-        return false;
+        return true;
     }
 
 
