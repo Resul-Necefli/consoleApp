@@ -5,44 +5,109 @@ import java.time.LocalDate;
 public class Student {
 
     public static Student[] students = new Student[100];
+
     private String fullName;
-    private int groupNo;
+    private String groupNo;
     private int point;
     private int id;
+    private boolean isDelete;
     static int createObjectCount;
-
-    public Student() {
-        createObjectCount++;
-        id += createObjectCount;
-    }
 
     LocalDate createDate;
     LocalDate updateDate;
     LocalDate deleteDate;
 
 
+    public Student() {
+        createObjectCount++;
+        id += createObjectCount;
+    }
+
     public void addStudent(Student student) {
+        boolean check = true;
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] == null) {
+                students[i] = student;
+                createDate = LocalDate.now();
+                check = false;
+                break;
+            }
+        }
 
+        if (check) {
+            Student[] newStudent = new Student[students.length * 2];
+
+            for (int i = 0; i < students.length; i++) {
+                newStudent[i] = students[i];
+            }
+
+            newStudent[students.length] = student;
+            students = newStudent;
+
+        }
 
     }
 
-    public void updateStudent(Student student) {
+    public boolean updateStudent(Student student, String groupNo) {
+
+        for (var object : students) {
+            if (object != null && object.groupNo.equals(groupNo)) {
+                object = student;
+                deleteDate = LocalDate.now();
+                return true;
+            }
+        }
+        return false;
 
     }
 
-    public void deleteStudnet(Student student) {
+    public boolean deleteStudnet(int id) {
+        boolean deleteCheck = false;
+        int deleteObjectIndex = -1;
+
+        for (int i = 0; i < students.length; i++) {
+
+            if (students[i] != null && students[i].id == id) {
+                deleteObjectIndex = i;
+                deleteCheck = true;
+                break;
+            }
+
+        }
+
+        if (deleteCheck) {
+            Student[] newStudents = new Student[students.length - 1];
+
+            for (int i = 0, j = 0; i < students.length; i++) {
+
+                if (i != deleteObjectIndex) {
+                    newStudents[j++] = students[i];
+                }
+
+            }
+            students = newStudents;
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
 
-    public void isDeleteStudent(Student student) {
+    public boolean isDeleteStudent(int id) {
+
+        boolean isDeleteCheck = false;
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null && students[i].id == id) {
+                students[i].isDelete = true;
+                return true;
+            }
+        }
+
+        return false;
 
     }
 
-    public void clacStudentAvarage() {
-
-
-    }
 
     public String getFullName() {
         return fullName;
@@ -52,11 +117,11 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public int getGroupNo() {
+    public String getGroupNo() {
         return groupNo;
     }
 
-    public void setGroupNo(int groupNo) {
+    public void setGroupNo(String groupNo) {
         this.groupNo = groupNo;
     }
 
