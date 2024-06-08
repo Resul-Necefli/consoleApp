@@ -4,7 +4,7 @@ package appProces;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
-///  calcSalayrAvrage()
+
 public class Employee {
     public static Employee[] employees = new Employee[50];
 
@@ -13,22 +13,22 @@ public class Employee {
     private String position;
     private double salary;
     private String departmentName;
-    private EmployeeType employeeType;
+    public EmployeeType employeeType;
     private boolean isDelete;
 
-    private LocalDate createDate;
-    private LocalDate updateDate;
-    private LocalDate deleteDate;
+    public LocalDate createDate;
+    public LocalDate updateDate;
+    public LocalDate deleteDate;
 
 
-    private int createObjectCount;
-    private static int index = 1000;
+    public static int createObjectCount;
+    private int index = 1000;
 
     public Employee(String departmentName) {
 
         createObjectCount++;
-        index += createObjectCount;
-        this.no = departmentName.substring(0, 2).toUpperCase() + index;
+        this.index += createObjectCount;
+        this.no = departmentName.substring(0, 2).toUpperCase() + this.index;
 
     }
 
@@ -70,10 +70,10 @@ public class Employee {
         boolean check = true;
         for (int i = 0; i < employees.length; i++) {
 
-                   if (employee != null && employees[i].no.equals(no)) {
+            if (employee != null && employees[i].no.equals(no)) {
 
                 employees[i] = employee;
-                employee.updateDate =  LocalDate.now();
+                employee.updateDate = LocalDate.now();
                 check = false;
                 break;
 
@@ -129,15 +129,13 @@ public class Employee {
             if (employees[i] != null && employees[i].no.equals(no)) {
                 check = false;
                 employees[i].isDelete = false;
-                employees[i].deleteDate =  LocalDate.now();
+                employees[i].deleteDate = LocalDate.now();
                 break;
             }
         }
 
         return check;
     }
-
-
 
 
     public EmployeeType getEmployeeType() {
@@ -190,7 +188,9 @@ public class Employee {
 
     public boolean setSalary(double salary) {
 
-        if (salary >= 250) {
+        boolean a = University.checkSalaryLimit(salary);
+
+        if (a) {
             this.salary = salary;
             return true;
         }

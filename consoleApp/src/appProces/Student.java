@@ -11,12 +11,11 @@ public class Student {
     private int point;
     private int id;
     private boolean isDelete;
-    static int createObjectCount;
+    public LocalDate createDate;
+    public LocalDate updateDate;
+    public LocalDate deleteDate;
 
-    LocalDate createDate;
-    LocalDate updateDate;
-    LocalDate deleteDate;
-
+    public static int createObjectCount;
 
     public Student() {
         createObjectCount++;
@@ -24,11 +23,11 @@ public class Student {
     }
 
     public void addStudent(Student student) {
+        createDate = LocalDate.now();
         boolean check = true;
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
                 students[i] = student;
-                createDate = LocalDate.now();
                 check = false;
                 break;
             }
@@ -40,6 +39,7 @@ public class Student {
             for (int i = 0; i < students.length; i++) {
                 newStudent[i] = students[i];
             }
+
 
             newStudent[students.length] = student;
             students = newStudent;
@@ -96,10 +96,10 @@ public class Student {
 
     public boolean isDeleteStudent(int id) {
 
-        boolean isDeleteCheck = false;
         for (int i = 0; i < students.length; i++) {
             if (students[i] != null && students[i].id == id) {
                 students[i].isDelete = true;
+                deleteDate = LocalDate.now();
                 return true;
             }
         }
