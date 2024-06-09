@@ -22,6 +22,20 @@ public class Student {
         id += createObjectCount;
     }
 
+    public  void      getAllStudents(){
+        for (var studentObject :  students){
+            if (studentObject!=null){
+                System.out.println(studentObject);
+            }
+        }
+    }    public  void      getAllStudents(String groupNo){
+        for (var studentObject :  students){
+            if (studentObject!=null && studentObject.groupNo.equals(groupNo)){
+                System.out.println(studentObject);
+            }
+        }
+    }
+
     public void addStudent(Student student) {
         createDate = LocalDate.now();
         boolean check = true;
@@ -47,6 +61,8 @@ public class Student {
         }
 
     }
+
+
 
     public boolean updateStudent(Student student, String groupNo) {
 

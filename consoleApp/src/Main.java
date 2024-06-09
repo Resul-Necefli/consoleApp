@@ -15,14 +15,103 @@ public class Main {
     public static void main(String[] args) {
 
 
-
-        create();
     }
 
 
+    public static void showMenu() {
+
+        System.out.println("operations that can be used : ");
+        System.out.print("1. Employee   2. Student : ");
+
+        int a = scanner.nextInt();
+
+        switch (a) {
+
+            case 1:
+                employeeProces();
+                break;
+            case 2:
+                studentProces();
+                break;
+
+            default:
+                System.out.println("wrong choice !");
+        }
+
+    }
 
 
-    
+    public static void employeeMenu() {
+
+        System.out.println("1 - show a list of all jobs"); // get all metods
+        System.out.println("2 - Basically, employees are listed under department name\n ");
+        System.out.println("3 - Employee  add ");
+        System.out.println("4 - Employee  update");
+        System.out.println("5 - Employee delete");
+        System.out.println("6 - Employee isDelete");
+        System.out.println("7 - Search");
+
+
+    }
+
+
+    public static void employeeProces() {
+        employeeMenu();
+        int b = scanner.nextInt();
+        switch (b) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            default:
+                System.out.println("wrong cohice !");
+        }
+    }
+
+
+    public static void studentMenu() {
+        System.out.println("1 - List of students "); // groupNo
+        System.out.println("2 - Create student ");
+        System.out.println("3 - update student ");  // groupNo
+        System.out.println("4 - students average points"); // groupNo
+
+    }
+
+
+    public static void studentProces() {
+        studentMenu();
+        int j = scanner.nextInt();
+        switch (j) {
+
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+
+            default:
+                System.out.println("wrong choice !");
+
+
+        }
+    }
+
+
     public static void create() {
         Employee employee = new Employee("IT");
         System.out.print("ad ve  soy adinizi daxil dein : ");
