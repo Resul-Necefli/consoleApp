@@ -2,11 +2,10 @@ package appProces;
 
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 
 public class Employee {
-    public static Employee[] employees = new Employee[50];
+    public static Employee[] employees = new Employee[100];
+    private static University university = new University();
 
     private String no;
     private String fulName;
@@ -32,10 +31,15 @@ public class Employee {
 
     }
 
-    public void addEmployee(Employee employee) {
+    public boolean addEmployee(Employee employee) {
+
+
+        if (!university.setWorkerLimit(createObjectCount)) {
+            System.out.println("The staff limit of the university is full");
+            return false;
+        }
 
         employee.createDate = LocalDate.now();
-
         boolean check = true;
         for (int i = 0; i < employees.length; i++) {
 
@@ -63,6 +67,7 @@ public class Employee {
         }
 
 
+        return true;
     }
 
     public boolean updateEmloyee(Employee employee, String no) {
@@ -188,14 +193,21 @@ public class Employee {
 
     public boolean setSalary(double salary) {
 
-        boolean a = University.checkSalaryLimit(salary);
+        if (salary >= 250 && salary <= 1500) {
+            System.out.println("min 250  max 1500  azn enter your");
+            return false;
+
+        }
+
+
+        boolean a = university.setSalaryLimit(salary);
 
         if (a) {
             this.salary = salary;
             return true;
         }
 
-        System.out.println("salary should be at least 250 Azn");
+        System.out.println("We cannot pay this salary because the budget is insufficient\n");
         return false;
 
 

@@ -2,9 +2,11 @@ package appProces;
 
 public class University {
 
-    public String name;
-    private int workerLimit;
-    private double salaryLimit;
+
+    public static String name = "Azerbaycan Dovlen Neft ve Senaye Universiteti";
+    private int workerLimit =50;
+    private double salaryLimit = 50000;
+    private  double  commonSalary;
 
     public double calcSalaryAvarege() {
 
@@ -51,8 +53,15 @@ public class University {
         return workerLimit;
     }
 
-    public void setWorkerLimit(int workerLimit) {
-        this.workerLimit = workerLimit;
+    public boolean setWorkerLimit(int workerLimit) {
+
+        if (workerLimit >= 1 && workerLimit <= 50) {
+            this.workerLimit = workerLimit;
+            return  true;
+        }
+
+        return  false;
+
     }
 
 
@@ -60,10 +69,26 @@ public class University {
         return salaryLimit;
     }
 
-    public  static  boolean checkSalaryLimit(double salaryLimit) {
-        if (salaryLimit >=250 && salaryLimit < 1500){
-            return  true;
+
+    public boolean setSalaryLimit(double salaryLimit) {
+
+        if (this.salaryLimit >=  commonSalary + salaryLimit){
+             this.salaryLimit -= salaryLimit;
+             setCommonSalary(salaryLimit);
+             return  true;
         }
+
         return  false;
+
+
+
+    }
+
+    public double getCommonSalary() {
+        return commonSalary;
+    }
+
+    public void setCommonSalary(double commonSalary) {
+        this.commonSalary += commonSalary;
     }
 }

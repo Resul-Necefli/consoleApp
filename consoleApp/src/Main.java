@@ -20,6 +20,9 @@ public class Main {
     }
 
 
+
+
+    
     public static void create() {
         Employee employee = new Employee("IT");
         System.out.print("ad ve  soy adinizi daxil dein : ");
