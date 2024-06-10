@@ -7,12 +7,13 @@ public class Employee {
     public static Employee[] employees = new Employee[100];
     private static University university = new University();
 
+
     private String no;
-    private String fulName;
-    private String position;
-    private double salary;
-    private String departmentName;
-    public EmployeeType employeeType;
+    private String fulName; // -
+    private String position;//+
+    private double salary;//+
+    private String departmentName; //+
+    public EmployeeType employeeType;//+
     private boolean isDelete;
 
     public LocalDate createDate;
@@ -28,6 +29,11 @@ public class Employee {
         createObjectCount++;
         this.index += createObjectCount;
         this.no = departmentName.substring(0, 2).toUpperCase() + this.index;
+
+    }
+
+
+    public Employee() {
 
     }
 
@@ -94,19 +100,19 @@ public class Employee {
     public boolean deleteEmployee(String no) {
 
 
-        boolean check = true;
-        int index = 0;
+        boolean check = false;
+        int index = -1;
         for (int i = 0; i < employees.length; i++) {
 
-            if (employees[i].no.equals(no)) {
-                check = false;
+            if ( employees[i] != null && employees[i].no.equals(no)) {
+                check = true;
                 index = i;
                 break;
             }
         }
 
 
-        if (!check) {
+        if (check) {
             Employee[] employeesDelete = new Employee[employees.length - 1];
 
             for (int i = 0, j = 0; i < employees.length; i++) {
@@ -127,12 +133,12 @@ public class Employee {
 
 
     public boolean isDeleteEmployee(String no) {
-        boolean check = true;
+        boolean check = false;
 
         for (int i = 0; i < employees.length; i++) {
 
             if (employees[i] != null && employees[i].no.equals(no)) {
-                check = false;
+                check = true;
                 employees[i].isDelete = false;
                 employees[i].deleteDate = LocalDate.now();
                 break;
@@ -151,7 +157,7 @@ public class Employee {
         this.employeeType = employeeType;
     }
 
-    public boolean isDelete() {
+    public boolean isDelete(String groupNo) {
         return isDelete;
     }
 
@@ -193,7 +199,7 @@ public class Employee {
 
     public boolean setSalary(double salary) {
 
-        if (salary >= 250 && salary <= 1500) {
+        if (salary < 250 || salary > 1500) {
             System.out.println("min 250  max 1500  azn enter your");
             return false;
 

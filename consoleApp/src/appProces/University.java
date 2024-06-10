@@ -55,7 +55,7 @@ public class University {
 
     public boolean setWorkerLimit(int workerLimit) {
 
-        if (workerLimit >= 1 && workerLimit <= 50) {
+        if ( workerLimit <= 50) {
             this.workerLimit = workerLimit;
             return  true;
         }
