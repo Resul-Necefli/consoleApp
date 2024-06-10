@@ -22,13 +22,13 @@ public class Student {
         id += createObjectCount;
     }
 
-    public  void      getAllStudents(){
+    public static   void      getAllStudents(){
         for (var studentObject :  students){
             if (studentObject!=null){
                 System.out.println(studentObject);
             }
         }
-    }    public  void      getAllStudents(String groupNo){
+    }    public static   void  getAllStudents(String groupNo){
         for (var studentObject :  students){
             if (studentObject!=null && studentObject.groupNo.equals(groupNo)){
                 System.out.println(studentObject);
@@ -36,18 +36,18 @@ public class Student {
         }
     }
 
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
         createDate = LocalDate.now();
-        boolean check = true;
+        boolean check = false;
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
                 students[i] = student;
-                check = false;
+                check = true;
                 break;
             }
         }
 
-        if (check) {
+        if (!check) {
             Student[] newStudent = new Student[students.length * 2];
 
             for (int i = 0; i < students.length; i++) {
@@ -59,6 +59,8 @@ public class Student {
             students = newStudent;
 
         }
+
+        return check;
 
     }
 

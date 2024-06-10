@@ -9,11 +9,11 @@ public class Employee {
 
 
     private String no;
-    private String fulName; // -
-    private String position;//+
-    private double salary;//+
-    private String departmentName; //+
-    public EmployeeType employeeType;//+
+    private String fulName;
+    private String position;
+    private double salary;
+    private String departmentName;
+    public EmployeeType employeeType;
     private boolean isDelete;
 
     public LocalDate createDate;
