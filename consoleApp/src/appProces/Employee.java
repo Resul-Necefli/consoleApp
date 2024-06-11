@@ -8,10 +8,10 @@ public class Employee {
     private static University university = new University();
 
 
-    private String no ;
+    private String no;
     private String name;
 
-    private  String surname;
+    private String surname;
     private String position;
     private double salary;
     private String departmentName;
@@ -23,16 +23,62 @@ public class Employee {
     public LocalDate deleteDate;
 
     public static int createObjectCount;
-    private   int index = 999;
-
+    private int index = 999;
 
 
     public Employee() {
         createObjectCount++;
-      this.index +=createObjectCount;
+        this.index += createObjectCount;
 
 
     }
+
+
+    public static void search(String employeeNo) {
+
+        boolean check = false;
+        for (int i = 0; i < employees.length; i++) {
+
+            if (employees[i] != null && employees[i].no.startsWith(employeeNo)) {
+
+                System.out.println(employees[i]);
+
+                check = true;
+
+            }
+
+        }
+        if (!check) {
+
+            System.out.println("not found !");
+        }
+
+
+    }
+
+
+
+    public  static  void  search(String name , String surname){
+
+        boolean check = false;
+        for (int i = 0; i < employees.length; i++) {
+
+            if (employees[i] != null && employees[i].name.startsWith(name)   && employees[i].surname.startsWith(surname) ){
+
+                System.out.println(employees[i]);
+
+                check = true;
+
+            }
+
+        }
+        if (!check) {
+
+            System.out.println("not found !");
+        }
+
+    }
+
 
     public boolean addEmployee(Employee employee) {
 
@@ -72,6 +118,7 @@ public class Employee {
 
         return true;
     }
+
 
     public boolean updateEmloyee(Employee employee, String no) {
 
@@ -186,7 +233,7 @@ public class Employee {
         return index;
     }
 
-    public void setNo(String no){
+    public void setNo(String no) {
         this.no = no;
     }
 
@@ -262,4 +309,6 @@ public class Employee {
                 ", deleteDate=" + deleteDate +
                 '}';
     }
+
+
 }

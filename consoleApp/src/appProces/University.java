@@ -1,7 +1,6 @@
 package appProces;
 
 import java.util.Scanner;
-import java.util.SplittableRandom;
 
 public class University {
 
@@ -346,10 +345,6 @@ public class University {
     }
 
 
-    public static void search() {
-
-    }
-
     public static void createEmployee() {
         Employee employee = new Employee();
 
@@ -559,6 +554,36 @@ public class University {
         return "object not found ";
 
     }
+
+    public static void search() {
+
+        System.out.println("1 -  search  by first  and last name ");
+        System.out.println("2 -  search by empoyeeNo");
+
+        int a = scanner.nextInt();
+
+        switch (a) {
+            case 1:
+                System.out.print("Enter your  employeNo : ");
+                String no = scanner.next();
+                employee.search(no);
+                break;
+            case 2:
+                System.out.print("Enter your  name : ");
+                String name = scanner.next();
+                System.out.print("Enter your surname :");
+                String surname = scanner.next();
+                employee.search(name, surname);
+                break;
+
+            default:
+                System.out.println("wrong  choice !! ");
+        }
+
+
+    }
+
+
 
 
 }
