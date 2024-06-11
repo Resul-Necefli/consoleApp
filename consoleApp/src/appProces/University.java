@@ -105,7 +105,6 @@ public class University {
         int a = scanner.nextInt();
 
         switch (a) {
-
             case 1:
                 employeeProces();
                 break;
@@ -300,7 +299,7 @@ public class University {
 
     public static void employeeMenu() {
 
-        System.out.println("1 - The department mainly looks after workers"); // get all metods
+        System.out.println("1 - The department  name  mainly looks after workers"); // get all metods
         System.out.println("2 - see all workers  ");
         System.out.println("3 - create employee");
         System.out.println("4 - Employee delete");
@@ -319,7 +318,7 @@ public class University {
         switch (b) {
             case 1:
                 System.out.print("Enter  your groupNo : ");
-                String sc = scanner.nextLine();
+                String sc = scanner.next();
                 employeeGetAll(sc);
                 break;
             case 2:
@@ -352,11 +351,20 @@ public class University {
     }
 
     public static void createEmployee() {
-        Employee employee = new Employee("IT");
-        System.out.print(" Enter  your name and surname  : ");
-        employee.setFulName(scanner.nextLine());
+        Employee employee = new Employee();
+
+
+        System.out.print(" Enter  your name   : ");
+        var name = scanner.next();
+        employee.setName(name);
+
+        System.out.print("Enter your surname : ");
+        var surname = scanner.next();
+        employee.setSurname(surname);
 
         scanner.nextLine();
+
+
         while (true) {
             System.out.print("Enter yout position : ");
             boolean v = employee.setPosition(scanner.nextLine());
@@ -380,6 +388,9 @@ public class University {
                 break;
             }
         }
+        employee.setNo(employee.getDepartmentName().substring(0, 2) + employee.getIndex());
+
+
         boolean check = enumTypeCheck(employee);
         while (check) {
             boolean v = enumTypeCheck(employee);
@@ -387,6 +398,7 @@ public class University {
                 break;
             }
         }
+
         employee.addEmployee(employee);
 
         System.out.println();
@@ -435,8 +447,8 @@ public class University {
     }
 
     public static void arrayElmentDelete() {
-        System.out.print("Enter the object  groupNo to be object : ");
-        String ch = scanner.nextLine();
+        System.out.print("Enter the object  employeeNo to be object : ");
+        String ch = scanner.next();
         boolean a = employee.deleteEmployee(ch);
 
         if (a) {
@@ -452,11 +464,10 @@ public class University {
 
     public static void isDelete() {
 
+        System.out.print("Enter the object  employeeNo to be object : ");
+        String employeeNo = scanner.next();
 
-        System.out.print("Enter the object  groupNo to be object : ");
-        String groupNo = scanner.next();
-
-        boolean a = employee.isDeleteEmployee(groupNo);
+        boolean a = employee.isDeleteEmployee(employeeNo);
 
         if (a) {
             System.out.println("object deleted");
@@ -470,22 +481,36 @@ public class University {
 
 
     public static void employeeGetAll() {
-        for (var employeeObject : Employee.employees) {
+        boolean cehck = false;
+        for (Employee employeeObject : Employee.employees) {
 
-            if (employeeObject != null) {
+            if (employeeObject != null && employeeObject.getisDelete() == cehck) {
                 System.out.println(employeeObject);
+                cehck = true;
             }
         }
+
+        if (!cehck) {
+            System.out.println("employee not found !");
+        }
+
 
     }
 
 
     public static void employeeGetAll(String departmentName) {
 
+        boolean check = false;
         for (var employeeObject : Employee.employees) {
             if (employeeObject != null && employeeObject.getDepartmentName().equals(departmentName)) {
                 System.out.println(employeeObject);
+                check = true;
             }
+        }
+
+
+        if (!check) {
+            System.out.println(" employee not found !");
         }
     }
 
@@ -493,13 +518,13 @@ public class University {
     public static String employeeUpdate() {
 
         boolean check = false;
-        System.out.print("Enter the groupno value of the object you want to update : ");
+        System.out.print("Enter the employeeNo value of the object you want to update : ");
 
-        String groupNo = scanner.nextLine();
+        String employeeNo = scanner.next().trim();
 
         for (var object : Employee.employees) {
 
-            if (object != null && object.getNo().equals(groupNo)) {
+            if (object != null && object.getNo().equals(employeeNo)) {
 
                 System.out.println("information about the object you are looking for");
                 System.out.println();
@@ -513,18 +538,17 @@ public class University {
 
         if (check) {
             System.out.print("Enter your positin : ");
-            String position = scanner.nextLine();
-            scanner.next();
+            String position = scanner.next().trim();
 
             System.out.print("Enter your salary : ");
             double salary = scanner.nextDouble();
 
             for (var employeeObject : Employee.employees) {
-                if (employeeObject != null && employeeObject.getNo().equals(groupNo)) {
+                if (employeeObject != null && employeeObject.getNo().equals(employeeNo)) {
 
                     employeeObject.setSalary(salary);
                     employeeObject.setPosition(position);
-                    return employeeObject.updateEmloyee(employeeObject, groupNo) ? "object updated" : "object  not updated";
+                    return employeeObject.updateEmloyee(employeeObject, employeeNo) ? "object updated" : "object  not updated";
                 }
 
             }

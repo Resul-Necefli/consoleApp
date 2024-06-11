@@ -8,8 +8,10 @@ public class Employee {
     private static University university = new University();
 
 
-    private String no;
-    private String fulName;
+    private String no ;
+    private String name;
+
+    private  String surname;
     private String position;
     private double salary;
     private String departmentName;
@@ -20,20 +22,15 @@ public class Employee {
     public LocalDate updateDate;
     public LocalDate deleteDate;
 
-
     public static int createObjectCount;
-    private int index = 1000;
+    private   int index = 999;
 
-    public Employee(String departmentName) {
-
-        createObjectCount++;
-        this.index += createObjectCount;
-        this.no = departmentName.substring(0, 2).toUpperCase() + this.index;
-
-    }
 
 
     public Employee() {
+        createObjectCount++;
+      this.index +=createObjectCount;
+
 
     }
 
@@ -104,7 +101,7 @@ public class Employee {
         int index = -1;
         for (int i = 0; i < employees.length; i++) {
 
-            if ( employees[i] != null && employees[i].no.equals(no)) {
+            if (employees[i] != null && employees[i].no.equals(no)) {
                 check = true;
                 index = i;
                 break;
@@ -139,7 +136,7 @@ public class Employee {
 
             if (employees[i] != null && employees[i].no.equals(no)) {
                 check = true;
-                employees[i].isDelete = false;
+                employees[i].isDelete = true;
                 employees[i].deleteDate = LocalDate.now();
                 break;
             }
@@ -157,7 +154,7 @@ public class Employee {
         this.employeeType = employeeType;
     }
 
-    public boolean isDelete(String groupNo) {
+    public boolean getisDelete() {
         return isDelete;
     }
 
@@ -169,13 +166,28 @@ public class Employee {
         return no;
     }
 
-
-    public String getFulName() {
-        return fulName;
+    public String getName() {
+        return name;
     }
 
-    public void setFulName(String fulName) {
-        this.fulName = fulName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setNo(String no){
+        this.no = no;
     }
 
     public String getPosition() {
@@ -238,7 +250,8 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "no='" + no + '\'' +
-                ", fulName='" + fulName + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", position='" + position + '\'' +
                 ", salary=" + salary +
                 ", departmentName='" + departmentName + '\'' +

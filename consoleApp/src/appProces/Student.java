@@ -22,15 +22,17 @@ public class Student {
         id += createObjectCount;
     }
 
-    public static   void      getAllStudents(){
-        for (var studentObject :  students){
-            if (studentObject!=null){
+    public static void getAllStudents() {
+        for (var studentObject : students) {
+            if (studentObject != null) {
                 System.out.println(studentObject);
             }
         }
-    }    public static   void  getAllStudents(String groupNo){
-        for (var studentObject :  students){
-            if (studentObject!=null && studentObject.groupNo.equals(groupNo)){
+    }
+
+    public static void getAllStudents(String groupNo) {
+        for (var studentObject : students) {
+            if (studentObject != null && studentObject.groupNo.equals(groupNo)) {
                 System.out.println(studentObject);
             }
         }
@@ -63,7 +65,6 @@ public class Student {
         return check;
 
     }
-
 
 
     public boolean updateStudent(Student student, String groupNo) {
