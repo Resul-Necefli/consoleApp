@@ -6,8 +6,8 @@ public class Student {
 
     public static Student[] students = new Student[100];
 
-    private String fullName;
-    private String groupNo;
+    public String fullName;
+    public String groupNo;
     private int point;
     private int id;
     private boolean isDelete;
@@ -15,7 +15,7 @@ public class Student {
     public LocalDate updateDate;
     public LocalDate deleteDate;
 
-    public static int createObjectCount;
+    public static int createObjectCount = -1;
 
     public Student() {
         createObjectCount++;
@@ -149,7 +149,84 @@ public class Student {
     }
 
     public void setPoint(int point) {
-        this.point = point;
+
+        if (point < 0 || point > 100) {
+            System.out.println(" enter point min 0  max  100  ");
+        } else {
+            this.point = point;
+        }
+
+    }
+
+    public void search(int id) {
+
+        boolean check = false;
+        for (int i = 0; i < students.length; i++) {
+
+            if (students[i] != null && students[i].id == id) {
+
+                System.out.println("information about the exchanged object: ");
+                System.out.println(students[i]);
+
+                check = true;
+
+            }
+
+
+        }
+
+
+        if (!check) {
+            System.out.println("object not found ");
+        }
+
+    }
+
+
+    public void search(String fullName) {
+
+        boolean check = false;
+
+        for (int i = 0; i < students.length; i++) {
+
+            if (students[i] != null && students[i].fullName.startsWith(fullName)) {
+
+                System.out.println(students[i]);
+                check = true;
+
+            }
+
+        }
+
+
+        if (!check) {
+
+            System.out.println("object not found ! ");
+        }
+
+
+    }
+
+
+    public void search(String groupNo, int point) {
+
+        boolean check = false;
+
+        for (int i = 0; i < students.length; i++) {
+
+            if (students[i] != null && students[i].groupNo.startsWith(groupNo) && students[i].point == point) {
+
+                System.out.println(students[i]);
+                check = true;
+            }
+
+        }
+
+        if (!check) {
+
+            System.out.println("object not found ! ");
+        }
+
     }
 
     @Override

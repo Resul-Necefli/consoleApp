@@ -25,19 +25,23 @@ public class University {
     }
 
 
-    public static int calcStudentAvarge() {
+    public static void calcStudentAvarge() {
 
         int calcPointAvarage = 0;
         for (int i = 0; i < Student.students.length; i++) {
 
-            calcPointAvarage += Student.students[i].getPoint();
+            if (Student.students[i] != null) {
+                calcPointAvarage += Student.students[i].getPoint();
+            }
+
 
         }
 
-        return calcPointAvarage / Student.createObjectCount;
+        System.out.println(calcPointAvarage / Student.createObjectCount);
+
     }
 
-    public static int calcStudentAvarge(String groupNo) {
+    public static void calcStudentAvarge(String groupNo) {
 
         int groupNoPiontAvarageCalc = 0;
         int groupNocount = 0;
@@ -49,7 +53,8 @@ public class University {
             }
 
         }
-        return groupNoPiontAvarageCalc / groupNocount;
+
+        System.out.println(groupNoPiontAvarageCalc / groupNocount);
 
 
     }
@@ -142,6 +147,7 @@ public class University {
 
             case 2:
                 System.out.print("Enter  your groupNo : ");
+                scanner.nextLine();
                 String groupNo = scanner.nextLine();
                 Student.getAllStudents(groupNo);
                 break;
@@ -157,22 +163,85 @@ public class University {
 
             case 6:
                 System.out.print("Enter your groupNo : ");
-                String ch = scanner.nextLine();
+                String ch = scanner.next();
                 calcStudentAvarge(ch);
                 break;
 
             case 7:
                 deleteStudent();
+                break;
             case 8:
                 showMenu();
+                break;
             case 9:
-                search();
+                searchStudent();
 
+                break;
             default:
                 System.out.println("wrong choice !");
 
 
         }
+    }
+
+
+    public static void searchStudent() {
+
+        System.out.println("1. search by id value ");
+        System.out.println("2.  search  by fullname  name ");
+        System.out.println("3. search groupNO and   point ");
+
+        System.out.print("Enter your choice : ");
+        int a = scanner.nextInt();
+
+        switch (a) {
+            case 1:
+                searchIdstudent();
+                break;
+            case 2:
+                searchFullNameStudent();
+                break;
+            case 3:
+                searchPointGroupNo();
+                break;
+            default:
+
+                System.out.println("wrong choice !");
+        }
+
+    }
+
+
+    public static void searchPointGroupNo() {
+        System.out.print("Entery your point : ");
+        int point = scanner.nextInt();
+
+        System.out.print("Enter your groupNO : ");
+        String gropNo = scanner.next();
+
+        student.search(gropNo, point);
+
+
+    }
+
+    public static void searchFullNameStudent() {
+
+        System.out.println("Enter your  fullName : ");
+        scanner.next();
+        String fullName = scanner.nextLine();
+
+        student.search(fullName);
+    }
+
+    public static void searchIdstudent() {
+
+        System.out.print("Enter  your  object id 🧐 : ");
+
+        int id = scanner.nextInt();
+
+        student.search(id);
+
+
     }
 
 
@@ -214,13 +283,13 @@ public class University {
     public static String updateStudent() {
 
         boolean check = false;
-        System.out.print("Enter the groupno value of the object you want to update : ");
-
-        String groupN = scanner.nextLine();
+        System.out.print("Enter the groupNo value of the object you want to update : ");
+        scanner.nextLine();
+        String groupNo = scanner.next();
 
         for (var object : Student.students) {
 
-            if (object != null && object.getGroupNo().equals(groupN)) {
+            if (object != null && object.getGroupNo().equals(groupNo)) {
 
                 System.out.println("information about the object you are looking for");
                 System.out.println();
@@ -233,19 +302,20 @@ public class University {
 
 
         if (check) {
-            System.out.print("Enter your groupNo  : ");
-            String groupNo = scanner.nextLine();
-            scanner.nextLine();
+            System.out.print("Enter your  new groupNo  : ");
 
-            System.out.print("Enter your point : ");
+            String no = scanner.next();
+
+            System.out.print("Enter your new  point : ");
             int point = scanner.nextInt();
+
 
             for (var studentObject : Student.students) {
                 if (studentObject != null && studentObject.getGroupNo().equals(groupNo)) {
 
-                    studentObject.setGroupNo(groupNo);
+                    studentObject.setGroupNo(no);
                     studentObject.setPoint(point);
-                    return studentObject.updateStudent(studentObject, groupNo) ? "object updated" : "object  not updated";
+                    return student.updateStudent(studentObject, studentObject.getGroupNo()) ? "object updated" : "object  not updated";
                 }
 
             }
@@ -263,6 +333,7 @@ public class University {
         Student student = new Student();
 
         System.out.print(" Enter  your  fullName : ");
+        scanner.nextLine();
         String fullName = scanner.nextLine();
         System.out.print("Enter your   gourpNo : ");
         String groupNo = scanner.nextLine();
@@ -282,14 +353,6 @@ public class University {
         } else {
 
             System.out.println("the operation could not be completed successfully !!!");
-        }
-
-
-        System.out.print("Do you want to continue the practice? (yes / no ): ");
-        String choice = scanner.nextLine();
-
-        if (choice.equalsIgnoreCase("yes")) {
-            createStudent();
         }
 
 
@@ -564,16 +627,16 @@ public class University {
 
         switch (a) {
             case 1:
-                System.out.print("Enter your  employeNo : ");
-                String no = scanner.next();
-                employee.search(no);
-                break;
-            case 2:
                 System.out.print("Enter your  name : ");
                 String name = scanner.next();
                 System.out.print("Enter your surname :");
                 String surname = scanner.next();
                 employee.search(name, surname);
+                break;
+            case 2:
+                System.out.print("Enter your  employeNo : ");
+                String no = scanner.next();
+                employee.search(no);
                 break;
 
             default:
@@ -582,8 +645,6 @@ public class University {
 
 
     }
-
-
 
 
 }
